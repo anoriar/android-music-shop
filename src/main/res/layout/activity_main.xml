@@ -112,6 +112,7 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     app:backgroundTint="@null"
+                    android:onClick="decreaseQuantity"
                     android:background="@drawable/button_shape"
                     android:text="-"></Button>
 
