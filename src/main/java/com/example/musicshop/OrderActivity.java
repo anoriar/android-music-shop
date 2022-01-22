@@ -3,7 +3,9 @@ package com.example.musicshop;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 public class OrderActivity extends AppCompatActivity {
@@ -33,5 +35,18 @@ public class OrderActivity extends AppCompatActivity {
         quantityTextView.setText(String.valueOf(quantity));
         priceTextView.setText(String.valueOf(price));
         orderPriceTextView.setText(String.valueOf(orderPrice));
+    }
+
+    public void composeEmail(String[] addresses, String subject) {
+        Intent intent = new Intent(Intent.ACTION_SENDTO);
+        intent.setData(Uri.parse("mailto:")); // only email apps should handle this
+        intent.putExtra(Intent.EXTRA_EMAIL, addresses);
+        intent.putExtra(Intent.EXTRA_SUBJECT, subject);
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
+    }
+
+    public void submitOrder(View view) {
     }
 }
