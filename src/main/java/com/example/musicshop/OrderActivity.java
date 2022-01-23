@@ -10,6 +10,10 @@ import android.widget.TextView;
 
 public class OrderActivity extends AppCompatActivity {
 
+    String[] addresses = {"kindiro1234@gmail.com"};
+    String subject = "Order from music shop";
+    String emailText;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,18 +39,24 @@ public class OrderActivity extends AppCompatActivity {
         quantityTextView.setText(String.valueOf(quantity));
         priceTextView.setText(String.valueOf(price));
         orderPriceTextView.setText(String.valueOf(orderPrice));
+
+        emailText = "Customer name: " + userName +
+                "\nGoods name: " + goodsName +
+                "\nQuantity: " + String.valueOf(quantity) +
+                "\nPrice: " + String.valueOf(price) +
+                "\nOrder price: " + String.valueOf(orderPrice);
+
     }
 
-    public void composeEmail(String[] addresses, String subject) {
+    public void submitOrder(View view) {
         Intent intent = new Intent(Intent.ACTION_SENDTO);
         intent.setData(Uri.parse("mailto:")); // only email apps should handle this
         intent.putExtra(Intent.EXTRA_EMAIL, addresses);
         intent.putExtra(Intent.EXTRA_SUBJECT, subject);
+        intent.putExtra(Intent.EXTRA_TEXT, emailText);
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
         }
     }
 
-    public void submitOrder(View view) {
-    }
 }
